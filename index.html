@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Симуляция ЭМ-волн в помещении</title>
+<title>Симуляция ЭМ-волн в помещении — Виноградов Дмитрий, 10В</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -23,6 +23,17 @@
   header {
     text-align: center;
     padding: 90px 20px 60px;
+  }
+  .author-badge {
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 8px 18px;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.4);
+    border-radius: 999px;
+    color: #c4b5fd;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
   }
   h1 {
     font-size: clamp(1.8rem, 5vw, 3rem);
@@ -127,6 +138,7 @@
     font-size: 0.9rem;
     border-top: 1px solid rgba(255,255,255,0.06);
   }
+  footer strong { color: #a78bfa; }
 </style>
 </head>
 <body>
@@ -134,6 +146,7 @@
 <canvas id="bg"></canvas>
 
 <header>
+  <div class="author-badge">Виноградов Дмитрий · 10В</div>
   <h1>Симуляция распространения ЭМ-волн</h1>
   <p>Интерактивное приложение для визуализации распространения электромагнитных волн внутри закрытого помещения с учётом стен, мебели и материалов.</p>
 </header>
@@ -185,25 +198,26 @@
   <section>
     <h2>Технологии</h2>
     <div class="tech">
-      <span class="tag">Python</span>
-      <span class="tag">Pygame</span>
-      <span class="tag">NumPy</span>
-      <span class="tag">Matplotlib</span>
+      <span class="tag">HTML5</span>
+      <span class="tag">CSS3</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Canvas API</span>
+      <span class="tag">Браузерная среда</span>
     </div>
   </section>
 
   <section>
     <h2>Как запустить</h2>
     <div class="card" style="font-family:monospace;font-size:0.9rem;color:#9aa8bf">
-      pip install -r requirements.txt<br>
-      python main.py
+      Откройте index.html в любом современном браузере.<br>
+      Никаких зависимостей и установки не требуется.
     </div>
   </section>
 
 </div>
 
 <footer>
-  Школьный проект · Электромагнитные волны · 2026
+  Автор: <strong>Виноградов Дмитрий, 10В</strong> · Школьный проект · 2026
 </footer>
 
 <script>
@@ -240,7 +254,6 @@ function drawBg() {
     bctx.fillStyle = 'rgba(79,172,254,0.6)';
     bctx.fill();
   });
-  // линии между близкими точками
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
@@ -264,10 +277,8 @@ const demo = document.getElementById('demo');
 const dctx = demo.getContext('2d');
 const dw = demo.width, dh = demo.height;
 
-// Источник
 const source = { x: dw * 0.3, y: dh * 0.5 };
 
-// Стены (прямоугольники)
 const walls = [
   { x: dw * 0.55, y: dh * 0.15, w: 14, h: dh * 0.45 },
   { x: dw * 0.55, y: dh * 0.75, w: 14, h: dh * 0.2 },
@@ -279,7 +290,6 @@ function drawDemo() {
   dctx.fillStyle = '#05080f';
   dctx.fillRect(0, 0, dw, dh);
 
-  // волны
   for (let k = 0; k < 4; k++) {
     const r = ((t * 1.5 + k * 60) % 260);
     dctx.beginPath();
@@ -289,7 +299,6 @@ function drawDemo() {
     dctx.stroke();
   }
 
-  // источник
   dctx.beginPath();
   dctx.arc(source.x, source.y, 8, 0, Math.PI * 2);
   dctx.fillStyle = '#00f2fe';
@@ -298,13 +307,11 @@ function drawDemo() {
   dctx.fill();
   dctx.shadowBlur = 0;
 
-  // стены
   walls.forEach(w => {
     dctx.fillStyle = 'rgba(167,139,250,0.75)';
     dctx.fillRect(w.x, w.y, w.w, w.h);
   });
 
-  // рамка комнаты
   dctx.strokeStyle = 'rgba(255,255,255,0.1)';
   dctx.lineWidth = 2;
   dctx.strokeRect(1, 1, dw - 2, dh - 2);
@@ -316,4 +323,4 @@ drawDemo();
 </script>
 
 </body>
-    </html>
+</html>
