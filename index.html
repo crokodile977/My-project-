@@ -7,117 +7,122 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #0a0e1a;
-    color: #e6ecf5;
-    line-height: 1.6;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #ffffff;
+    color: #111111;
+    line-height: 1.7;
     overflow-x: hidden;
   }
-  canvas#bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    opacity: 0.35;
-  }
+  canvas#bg { display: none; }
+
   header {
     text-align: center;
-    padding: 90px 20px 60px;
+    padding: 100px 20px 70px;
+    border-bottom: 2px solid #111;
   }
   .author-badge {
     display: inline-block;
-    margin-bottom: 24px;
-    padding: 8px 18px;
-    background: rgba(167,139,250,0.12);
-    border: 1px solid rgba(167,139,250,0.4);
-    border-radius: 999px;
-    color: #c4b5fd;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+    padding: 6px 16px;
+    border: 1px solid #111;
+    color: #111;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'Helvetica', Arial, sans-serif;
   }
   h1 {
     font-size: clamp(1.8rem, 5vw, 3rem);
-    background: linear-gradient(90deg, #4facfe, #00f2fe, #a78bfa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 16px;
-    font-weight: 800;
+    color: #000;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
   header p {
-    color: #9aa8bf;
+    color: #333;
     max-width: 640px;
     margin: 0 auto;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
+
   .container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px 80px;
   }
   section {
-    margin-bottom: 56px;
+    margin-bottom: 64px;
+    padding-top: 40px;
   }
   h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #4facfe;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 1.35rem;
+    margin-bottom: 24px;
+    color: #000;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #111;
   }
-  h2::before {
-    content: '';
-    width: 6px; height: 24px;
-    background: linear-gradient(#4facfe, #a78bfa);
-    border-radius: 3px;
-  }
+
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
+    gap: 0;
+    border-top: 1px solid #111;
+    border-left: 1px solid #111;
   }
   .card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 22px;
-    transition: transform 0.25s, border-color 0.25s;
+    background: #fff;
+    border-right: 1px solid #111;
+    border-bottom: 1px solid #111;
+    padding: 24px;
+    transition: background 0.2s;
   }
   .card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(79,172,254,0.5);
-  }
-  .card .icon {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-  }
-  .card h3 {
-    font-size: 1.05rem;
-    margin-bottom: 8px;
+    background: #111;
     color: #fff;
   }
+  .card:hover h3 { color: #fff; }
+  .card:hover p { color: #ccc; }
+  .card .icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    filter: grayscale(1);
+  }
+  .card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #000;
+    font-family: 'Helvetica', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
   .card p {
-    color: #9aa8bf;
+    color: #444;
     font-size: 0.92rem;
   }
+
   .tech {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
   .tag {
-    background: rgba(79,172,254,0.12);
-    border: 1px solid rgba(79,172,254,0.3);
-    color: #7fc9ff;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.88rem;
+    background: #fff;
+    border: 1px solid #111;
+    color: #111;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    font-family: 'Helvetica', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
+
   .demo-box {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
+    background: #fff;
+    border: 1px solid #111;
     padding: 20px;
     text-align: center;
   }
@@ -125,25 +130,42 @@
     width: 100%;
     max-width: 620px;
     aspect-ratio: 3/2;
-    background: #05080f;
-    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #111;
     display: block;
-    margin: 0 auto 12px;
+    margin: 0 auto 14px;
   }
-  .demo-box small { color: #6d7a92; }
+  .demo-box small {
+    color: #555;
+    font-size: 0.85rem;
+    font-family: 'Helvetica', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .run-box {
+    border: 1px solid #111;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #111;
+    background: #fafafa;
+  }
+
   footer {
     text-align: center;
     padding: 30px 20px;
-    color: #6d7a92;
-    font-size: 0.9rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    color: #333;
+    font-size: 0.85rem;
+    border-top: 2px solid #111;
+    font-family: 'Helvetica', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
-  footer strong { color: #a78bfa; }
+  footer strong { color: #000; }
 </style>
 </head>
 <body>
-
-<canvas id="bg"></canvas>
 
 <header>
   <div class="author-badge">Виноградов Дмитрий · 10В</div>
@@ -155,7 +177,7 @@
 
   <section>
     <h2>О проекте</h2>
-    <p style="color:#9aa8bf">
+    <p style="color:#333">
       Школьный проект, моделирующий, как Wi-Fi или радиосигнал распространяется в замкнутом пространстве.
       Приложение наглядно показывает отражения, затухание и влияние препятствий на качество сигнала.
     </p>
@@ -208,7 +230,7 @@
 
   <section>
     <h2>Как запустить</h2>
-    <div class="card" style="font-family:monospace;font-size:0.9rem;color:#9aa8bf">
+    <div class="run-box">
       Откройте index.html в любом современном браузере.<br>
       Никаких зависимостей и установки не требуется.
     </div>
@@ -221,58 +243,7 @@
 </footer>
 
 <script>
-// ---- Фон: сетка частиц ----
-const bg = document.getElementById('bg');
-const bctx = bg.getContext('2d');
-let W, H, particles = [];
-
-function resize() {
-  W = bg.width = innerWidth;
-  H = bg.height = innerHeight;
-}
-resize();
-addEventListener('resize', resize);
-
-for (let i = 0; i < 60; i++) {
-  particles.push({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    vx: (Math.random() - 0.5) * 0.4,
-    vy: (Math.random() - 0.5) * 0.4,
-    r: Math.random() * 2 + 0.5
-  });
-}
-
-function drawBg() {
-  bctx.clearRect(0, 0, W, H);
-  particles.forEach(p => {
-    p.x += p.vx; p.y += p.vy;
-    if (p.x < 0 || p.x > W) p.vx *= -1;
-    if (p.y < 0 || p.y > H) p.vy *= -1;
-    bctx.beginPath();
-    bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    bctx.fillStyle = 'rgba(79,172,254,0.6)';
-    bctx.fill();
-  });
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const d = Math.hypot(dx, dy);
-      if (d < 120) {
-        bctx.beginPath();
-        bctx.moveTo(particles[i].x, particles[i].y);
-        bctx.lineTo(particles[j].x, particles[j].y);
-        bctx.strokeStyle = `rgba(79,172,254,${0.15 * (1 - d/120)})`;
-        bctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(drawBg);
-}
-drawBg();
-
-// ---- Демо: волны в комнате ----
+// ---- Демо: волны в комнате (ч/б) ----
 const demo = document.getElementById('demo');
 const dctx = demo.getContext('2d');
 const dw = demo.width, dh = demo.height;
@@ -287,32 +258,33 @@ const walls = [
 
 let t = 0;
 function drawDemo() {
-  dctx.fillStyle = '#05080f';
+  dctx.fillStyle = '#ffffff';
   dctx.fillRect(0, 0, dw, dh);
 
+  // волны — черные линии с затуханием по прозрачности
   for (let k = 0; k < 4; k++) {
     const r = ((t * 1.5 + k * 60) % 260);
     dctx.beginPath();
     dctx.arc(source.x, source.y, r, 0, Math.PI * 2);
-    dctx.strokeStyle = `rgba(0, 242, 254, ${Math.max(0, 1 - r / 260) * 0.8})`;
-    dctx.lineWidth = 2;
+    dctx.strokeStyle = `rgba(0, 0, 0, ${Math.max(0, 1 - r / 260) * 0.85})`;
+    dctx.lineWidth = 1.5;
     dctx.stroke();
   }
 
+  // источник — чёрная точка
   dctx.beginPath();
-  dctx.arc(source.x, source.y, 8, 0, Math.PI * 2);
-  dctx.fillStyle = '#00f2fe';
-  dctx.shadowColor = '#00f2fe';
-  dctx.shadowBlur = 18;
+  dctx.arc(source.x, source.y, 7, 0, Math.PI * 2);
+  dctx.fillStyle = '#000';
   dctx.fill();
-  dctx.shadowBlur = 0;
 
+  // стены — чёрные прямоугольники
   walls.forEach(w => {
-    dctx.fillStyle = 'rgba(167,139,250,0.75)';
+    dctx.fillStyle = '#000';
     dctx.fillRect(w.x, w.y, w.w, w.h);
   });
 
-  dctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  // рамка комнаты
+  dctx.strokeStyle = '#000';
   dctx.lineWidth = 2;
   dctx.strokeRect(1, 1, dw - 2, dh - 2);
 
